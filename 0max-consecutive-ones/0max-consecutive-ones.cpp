@@ -5,14 +5,11 @@ public:
         int max_count = 0;
         int len = nums.size();
         for(int i=0; i<len; i++){
-            if(nums[i]==0){
-                max_count = max(count, max_count);
-                count = 0;
-            }
-            else{
+            if(nums[i]==1){
                 count++;
-                if(i == len-1) max_count = max(count, max_count);
+                max_count = max(count, max_count);
             }
+            else count = 0;
         }
         
         return max_count;
