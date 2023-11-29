@@ -3,9 +3,17 @@ public:
     int findNumbers(vector<int>& nums) {
         int count = 0;
         int digits;
-        string str;
+        int num;
+
         for(auto it: nums){
-            digits = floor(log10(it)) + 1;
+            num = it;
+            digits = 1;
+            
+            while(num/10 != 0){
+                digits ++;
+                num /= 10;
+            }
+            
             if(!(digits & 1)) count++;
         }
         
