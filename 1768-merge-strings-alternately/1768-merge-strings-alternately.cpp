@@ -20,9 +20,7 @@ public:
                 result.push_back(word2[i]);
                 i++;
             }
-            for(; i<len_2; i++){
-                result.push_back(word2[i]);
-            }
+            result += word2.substr(i, len_2-i);
         }
         else{
             int i=0;
@@ -31,9 +29,7 @@ public:
                 result.push_back(word2[i]);
                 i++;
             }
-            for(; i<len_1; i++){
-                result.push_back(word1[i]);
-            }
+            result += word1.substr(i, len_1-i);
         }
         
         return result;
