@@ -1,11 +1,10 @@
 class Solution {
 public:
     int findNumbers(vector<int>& nums) {
-        string str;
         int count = 0;
-        for(int i=0; i<nums.size(); i++){
-            str = to_string(nums[i]);
-            if(!(str.size() & 1)) count++;
+        for(auto it: nums){
+            if((it>=10 && it<100) || (it>=1000 && it<10000) || (it==100000))  
+                count++;
         }
         
         return count;
