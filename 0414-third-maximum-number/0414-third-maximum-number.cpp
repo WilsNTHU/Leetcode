@@ -1,12 +1,19 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        set<int> s(nums.begin(), nums.end());
-        set<int>:: reverse_iterator it = s.rbegin();
-        if(s.size() <= 2) return *it;
-        else {
-            advance(it, 2);
-            return *it;
+        sort(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.end());
+        
+        int len = nums.size();
+        if(len<=2) return nums[0];
+        else{
+            int count = 1;
+            for(int i=1; i<len; i++){
+                if(nums[i] != nums[i-1]) count++;
+                if(count == 3) return nums[i];
+            }
+            return nums[0];
         }
+
     }
 };
