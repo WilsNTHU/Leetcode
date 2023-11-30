@@ -8,7 +8,7 @@ public:
         for(int i=len-1; i>=0; i--){
             temp = arr[i];
             arr[i] = max_num;
-            max_num = max(arr[i], temp);
+            max_num = arr[i] > temp ? arr[i] : temp;
         }
 
         return arr;
