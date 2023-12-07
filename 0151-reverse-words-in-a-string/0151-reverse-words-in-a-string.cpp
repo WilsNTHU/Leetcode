@@ -7,6 +7,7 @@ public:
         while(i < n){
             while(i<n && s[i] == ' ') i++;
             while(i<n && s[i] != ' ') s[r++] = s[i++];
+            
             if(l < r){
                 reverse(s.begin()+l, s.begin()+r);
                 s[r++] = ' ';
@@ -14,7 +15,6 @@ public:
             }
         }
         if(r > 0) s.resize(r-1);
-        
         return s;
     }
 };
