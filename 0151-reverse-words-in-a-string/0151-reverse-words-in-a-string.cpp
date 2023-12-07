@@ -8,7 +8,6 @@ public:
             arr.push_back(temp);
         }
         
-        int left = 0, right = arr.size()-1;
         string answer;
         for(auto it = arr.rbegin(); it != arr.rend(); it++){
             if(it != arr.rbegin()) answer += " ";
