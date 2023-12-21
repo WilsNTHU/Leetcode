@@ -13,7 +13,7 @@ public:
             
             vector<int> min_arr(n, INT_MAX);
             vector<int> max_arr(n, INT_MIN);
-            for(auto &it: nums){
+            for(auto &&it: nums){
                 size_t index = (it-min) / k;
                 if(index == n) index = n-1;
                 if(it < min_arr[index]) min_arr[index] = it;
