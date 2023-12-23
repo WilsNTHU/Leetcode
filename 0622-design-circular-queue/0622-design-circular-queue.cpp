@@ -2,7 +2,7 @@ class MyCircularQueue {
 public:
     
     MyCircularQueue(int k) {
-        queue.reserve(k);
+        queue = new int[k];
         head = -1;
         tail = -1;
         size = k;
@@ -53,7 +53,7 @@ public:
     }
     
 private:
-    vector<int> queue;
+    int *queue;
     int head;
     int tail;
     int size;
