@@ -1,31 +1,38 @@
 class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
-        unordered_set<string> deadSet(deadends.begin(), deadends.end());
-        if (deadSet.count("0000")) return -1;
-        queue<string> q({"0000"});
-        for (int steps = 0; !q.empty(); ++steps) {
-            for (int i = q.size(); i > 0; --i) {
-                auto curr = q.front(); q.pop();
-                if (curr == target) return steps;
-                for (auto nei : neighbors(curr)) {
-                    if (deadSet.count(nei)) continue;
-                    deadSet.insert(nei); // Marked as visited
-                    q.push(nei);
+        int steps = 0, result = INT_MAX;
+        queue<string> q;
+        unordered_set<string> s(deadends.begin(), deadends.end());
+        if(s.count("0000")) return -1;
+        q.push("0000");
+        
+        for(; !q.empty(); steps++){
+            for(int i=q.size(); i>0; i--){
+                string str = q.front();
+                q.pop();
+                if(str == target) return steps;
+                for(int i=0; i<4; i++){
+                    char c = str[i];
+                    str[i] = (str[i]=='9') ? '0' : str[i]+1;
+                    if(!s.count(str)){
+                        q.push(str);
+                        s.insert(str);
+                    }
+                    str[i] = c;
+                }
+                for(int i=0; i<4; i++){
+                    char c = str[i];
+                    str[i] = (str[i]=='0') ? '9' : str[i]-1;
+                    if(!s.count(str)){
+                        q.push(str);
+                        s.insert(str);
+                    }
+                    str[i] = c;
                 }
             }
         }
+        
         return -1;
-    }
-    vector<string> neighbors(const string& code) {
-        vector<string> result;
-        for (int i = 0; i < 4; i++) {
-            for (int diff = -1; diff <= 1; diff += 2) {
-                string nei = code;
-                nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
-                result.push_back(nei);
-            }
-        }
-        return result;
     }
 };
