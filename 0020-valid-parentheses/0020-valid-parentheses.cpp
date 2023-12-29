@@ -3,9 +3,7 @@ public:
     bool isValid(string s) {
         stack<char> t;
         for(auto c: s){
-            if(c == '(') t.push(c);
-            else if(c == '[') t.push(c);
-            else if(c == '{') t.push(c);
+            if(c == '(' || c == '[' || c == '{') t.push(c);
             else if(c == ')'){
                 if(!t.empty() && t.top() == '(') t.pop();
                 else return false;
