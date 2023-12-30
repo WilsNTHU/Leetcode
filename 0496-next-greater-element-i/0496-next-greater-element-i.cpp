@@ -5,13 +5,13 @@ public:
         unordered_map<int, int> map;
         vector<int> result;
         
-        for(auto it=nums2.rbegin(); it!=nums2.rend(); it++){
-            while(!s.empty() && s.top()<(*it)) s.pop();
+        for(int i=nums2.size()-1; i>=0; i--){
+            while(!s.empty() && s.top()<nums2[i]) s.pop();
             
-            if(s.empty()) map[*it] = -1;
-            else map[*it] = s.top();
+            if(s.empty()) map[nums2[i]] = -1;
+            else map[nums2[i]] = s.top();
             
-            s.push(*it);
+            s.push(nums2[i]);
         }
         
         for(auto it: nums1) result.push_back(map[it]);
