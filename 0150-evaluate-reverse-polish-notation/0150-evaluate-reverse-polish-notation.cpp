@@ -1,37 +1,21 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
+        unordered_set<string> st({"+", "-", "*", "/"});
         stack<string> s;
+        
         for(string c: tokens){
-            if(c == "+"){
+            if(st.find(c) == st.end()) s.push(c);
+            else{
                 int x = stoi(s.top());
                 s.pop();
                 int y = stoi(s.top());
                 s.pop();
-                s.push(to_string(y+x));
+                if(c == "+") s.push(to_string(y+x));
+                else if(c == "-") s.push(to_string(y-x));
+                else if(c == "*") s.push(to_string(y*x));
+                else s.push(to_string(y/x));
             }
-            else if(c == "-"){
-                int x = stoi(s.top());
-                s.pop();
-                int y = stoi(s.top());
-                s.pop();
-                s.push(to_string(y-x));
-            }
-            else if(c == "*"){
-                int x = stoi(s.top());
-                s.pop();
-                int y = stoi(s.top());
-                s.pop();
-                s.push(to_string(y*x));
-            }
-            else if(c == "/"){
-                int x = stoi(s.top());
-                s.pop();
-                int y = stoi(s.top());
-                s.pop();
-                s.push(to_string(y/x));
-            }
-            else s.push(c);
         }
         
         return stoi(s.top());
