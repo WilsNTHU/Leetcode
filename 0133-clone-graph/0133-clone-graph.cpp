@@ -25,15 +25,15 @@ public:
     
     Node* cloneGraph(Node* node) {
         if(node == nullptr) return nullptr;
-        if(mp.find(node) == mp.end()){
-            Node *new_node = new Node(node->val, {});
-            mp[node] = new_node;
-            for(auto it: node->neighbors){
-                mp[node]->neighbors.push_back(cloneGraph(it));
-            }
+        
+        Node *new_node = new Node(node->val, {});
+        mp[node] = new_node;
+        for(auto it: node->neighbors){
+            if(mp.find(it) != mp.end()) mp[node]->neighbors.push_back(mp[it]);
+            else mp[node]->neighbors.push_back(cloneGraph(it));
         }
         
-        return mp[node];
+        return new_node;
     }
     
 };
