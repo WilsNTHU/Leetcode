@@ -1,14 +1,16 @@
 class Solution {
 public:
     int reverse(int x) {
+        bool flag = (x<0) ? true : false;
+        string str = to_string(x);
+        if(flag) str = str.substr(1, str.size()-1);
+        string temp = str;
+        std:: reverse(str.begin(), str.end());
         
-        long long num = 0;
-        while(x != 0){
-            num = num*10 + x%10;
-            x /= 10;
-        }
-        
-        if(num>INT_MAX || num<INT_MIN) return 0;
-        else return (int)num;
+        int len = str.size();
+        if(len == 10 && !flag && str.compare(to_string(INT_MAX))>0) return 0;
+        else if(len == 10 && flag && str.compare("2147483648")>0) return 0;
+        else if(flag) return (-1) * (stoi(str));
+        else return stoi(str);
     }
 };
