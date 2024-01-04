@@ -4,7 +4,6 @@ public:
         bool flag = (x<0) ? true : false;
         string str = to_string(x);
         if(flag) str = str.substr(1, str.size()-1);
-        string temp = str;
         std:: reverse(str.begin(), str.end());
         
         int len = str.size();
