@@ -1,36 +1,33 @@
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
-        heapSort(nums);
+        merge_sort(nums, 0, nums.size()-1);
         return nums;
     }
     
-    void heapSort(vector<int> &nums){
-        int n = nums.size();
-        for(int i=n/2 -1; i>=0; i--){
-            maxHeapify(nums, n, i);
-        }
-        
-        for(int i=n-1; i>0; i--){
-            int temp = nums[i];
-            nums[i] = nums[0];
-            nums[0] = temp;
-            maxHeapify(nums, i, 0);
-        }
+    void merge_sort(vector<int>& arr, int start, int end){
+        if(start == end) return;
+        int mid = start + (end-start)/2;
+        merge_sort(arr, start, mid);
+        merge_sort(arr, mid+1, end);
+        merge(arr, start, mid, end);
+        return;
     }
     
-    void maxHeapify(vector<int> &nums, int n, int idx){
-        int left = 2*idx + 1;
-        int right = 2*idx + 2;
-        int largest = idx;
-        if((left<n) && (nums[left]>nums[largest])) largest = left;
-        if((right<n) && (nums[right]>nums[largest])) largest = right;
-        
-        if(largest != idx){
-            int temp = nums[idx];
-            nums[idx] = nums[largest];
-            nums[largest] = temp;
-            maxHeapify(nums, n, largest);
+    void merge(vector<int> &arr, int start, int mid, int end){
+        vector<int> temp(end-start+1);
+        int left=start, right=mid+1, cur=0;
+        while(left<=mid && right<=end){
+            if(arr[left] <= arr[right]) temp[cur++] = arr[left++];
+            else temp[cur++] = arr[right++];
         }
+        
+        while(left<=mid) temp[cur++] = arr[left++];
+        while(right<=end) temp[cur++] = arr[right++];
+        
+        int idx=0;
+        while(start<=end) arr[start++] = temp[idx++];
+            
+        return;
     }
 };
