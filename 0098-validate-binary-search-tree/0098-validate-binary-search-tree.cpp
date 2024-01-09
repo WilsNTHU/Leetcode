@@ -40,6 +40,7 @@ public:
     bool helper(TreeNode* root, long long upper, long long lower){
         if(!root) return true;
         if(root->val >= upper || root->val <= lower) return false;
-        return helper(root->left, root->val, lower) && helper(root->right, upper, root->val);
+        return helper(root->left, root->val, lower) && 
+            helper(root->right, upper, root->val);
     }
 };
