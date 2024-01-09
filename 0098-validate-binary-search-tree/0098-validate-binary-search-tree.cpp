@@ -21,8 +21,7 @@ public:
                 root = root->left;
             }
             
-            root = s.top();
-            s.pop();
+            root = s.top(), s.pop();
             
             if(prev && prev->val >= root->val) return false;
             prev = root;
