@@ -32,16 +32,4 @@ public:
         return true;
     }
 
-    // top-down recursive solution
-    // bool isValidBST(TreeNode* root) {
-    //     return helper(root, INT_MAX, INT_MIN);
-    // }
-
-    // bool helper(TreeNode* root, int upper, int lower){
-    //     if(!root) return true;
-    //     if(root->val >= upper || root->val <= lower) return false;
-    //     bool t1 = helper(root->left, root->val, lower);
-    //     bool t2 = helper(root->right, upper, root->left);
-    //     return t1 && t2;
-    // }
 };
