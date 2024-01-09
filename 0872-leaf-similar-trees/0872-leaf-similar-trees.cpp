@@ -20,10 +20,7 @@ public:
     
     void helper(vector<int> &arr, TreeNode* root){
         if(!root) return;
-        if(!root->left && !root->right){
-            arr.push_back(root->val);
-            return;
-        }
+        if(!root->left && !root->right) arr.push_back(root->val);
         helper(arr, root->left);
         helper(arr, root->right);
         return;
