@@ -5,7 +5,8 @@ public:
         int x = 0, y = n-1;
         while(x<m && y>=0){
             if(matrix[x][y] == target) return true;
-            else if(target < matrix[x][y]) y--;
+            
+            if(target < matrix[x][y]) y--;
             else if(target > matrix[x][y]) x++; 
         }
         
