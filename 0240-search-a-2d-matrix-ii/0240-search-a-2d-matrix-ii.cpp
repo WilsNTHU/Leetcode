@@ -7,7 +7,7 @@ public:
             if(matrix[x][y] == target) return true;
             
             if(target < matrix[x][y]) y--;
-            else if(target > matrix[x][y]) x++; 
+            else x++; 
         }
         
         return false;
