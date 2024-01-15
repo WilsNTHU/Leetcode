@@ -1,39 +1,44 @@
 class Solution {
 public:
-    int result = 0;
     int totalNQueens(int n) {
-        vector<vector<int>> board(n, vector<int>(n, 0));
-        NQueenUtil(board, n, 0);
-        return result; 
+        vector<vector<bool>> vis(n, vector<bool>(n, false));
+        return NQueens_util(vis, 0, n);
     }
     
-    void NQueenUtil(vector<vector<int>> &board, int n, int col){
-        if(col == n) result++;
-        else{
-            for(int row = 0; row < n; row++){
-                if(is_safe(board, n, row, col)){
-                    board[row][col] = 1;
-                    NQueenUtil(board, n, col+1);
-                    board[row][col] = 0; // backtrack
+    int NQueens_util(vector<vector<bool>> &vis, int row, int n){
+        int ans = 0;
+        for(int col=0; col<n; col++){
+            if(isSafe(vis, row, col, n)){
+                if(row == n-1) ans++;
+                else {
+                    vis[row][col] = true;
+                    ans += NQueens_util(vis, row+1, n);
                 }
+                vis[row][col] = false;
             }
         }
+        
+        return ans;
     }
     
-    bool is_safe(vector<vector<int>> &board, int n, int row, int col){
-        for(int i=row, j=col; i>=0 && j>=0; j--){
-            if(board[i][j]) return false;
-            // check left half
+    bool isSafe(vector<vector<bool>> &vis, int &row, int &col, int &n){
+        
+        // examine the upper half of the same column
+        for(int i=row-1; i>=0; i--){
+            if(vis[i][col]) return false;
         }
-        for(int i=row, j=col; i>=0 && j>=0; i--, j--){
-            if(board[i][j]) return false;
-            // check upper diagonal
+        
+        // examine the upper left half of the diagonal
+        for(int i=row-1, j=col-1; i>=0 && j>=0; i--, j--){
+            if(vis[i][j]) return false;
         }
-        for(int i=row, j=col; i<n && j>=0; i++, j--){
-            if(board[i][j]) return false;
-            // check lower diagonal
+        
+        // examine the upper right half of the diagonal
+        for(int i=row-1, j=col+1; i>=0 && j<n; i--, j++){
+            if(vis[i][j]) return false;
         }
         
         return true;
     }
+    
 };
