@@ -6,7 +6,7 @@ public:
         
         unordered_set<int> s;
         for(auto &it: map){
-            if(s.count(it.second)) return false;
+            if(s.find(it.second) != s.end()) return false;
             s.insert(it.second);
         }
         
