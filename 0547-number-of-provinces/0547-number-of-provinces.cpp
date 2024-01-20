@@ -1,6 +1,6 @@
 class UnionFind{
     public:
-        UnionFind(int size): root(size), rank(size){
+        UnionFind(int size): root(size), rank(size), count(size){
             for(int i=0; i<size; i++){
                 root[i] = i;
                 rank[i] = 1;
@@ -15,15 +15,18 @@ class UnionFind{
         void unionSet(int x, int y){
             int rootX = find(x);
             int rootY = find(y);
-            if(rank[rootX] < rank[rootY]){
-                root[rootX] = rootY;
-            }
-            else if(rank[rootX] > rank[rootY]){
-                root[rootY] = rootX;
-            }
-            else{
-                root[rootY] = rootX;
-                rank[rootX]++;
+            if(rootX != rootY){
+                if(rank[rootX] < rank[rootY]){
+                    root[rootX] = rootY;
+                }
+                else if(rank[rootX] > rank[rootY]){
+                    root[rootY] = rootX;
+                }
+                else{
+                    root[rootY] = rootX;
+                    rank[rootX]++;
+                }
+                count--;
             }
         }
     
@@ -31,8 +34,13 @@ class UnionFind{
             return find(x) == find(y);
         }
     
+        int getCount(){return count;}
+    
+    
+    private:
         vector<int> root;
         vector<int> rank;
+        int count;
 };
 
 class Solution {
@@ -44,12 +52,10 @@ public:
         
         for(int i=0; i<n; i++)
             for(int j=i+1; j<n; j++){
-                if(isConnected[i][j] && s.find(i) != s.find(j)){
+                if(isConnected[i][j])
                     s.unionSet(i, j);
-                    answer--;
-                }
             }
         
-        return answer;
+        return s.getCount();
     }
 };
