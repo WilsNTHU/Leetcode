@@ -46,7 +46,8 @@ class Disjoint{
             
             for(auto &p: child){
                 string temp = "";
-                sort(p.second.begin(), p.second.end());
+                // sort(p.second.begin(), p.second.end());
+                // dont need to sort the indices, because we already add them in ascending order
                 for(auto &x: p.second) temp += str[x];
                 sort(temp.begin(), temp.end());
                 int k = 0;
