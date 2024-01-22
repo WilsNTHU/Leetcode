@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        queue<int> q;
         vector<vector<int>> adj(n);
         vector<bool> vis(n, false);
         
@@ -9,17 +10,19 @@ public:
             adj[v[1]].push_back(v[0]);
         }
         
-        stack<int> st;
-        st.push(source);
+        q.push(source);
+        vis[source] = true;
         
-        while(!st.empty()){
-            int node = st.top(); st.pop();
-            if(node == destination) return true;
-            if(vis[node]) continue;
+        while(!q.empty()){
+            int num = q.front(); q.pop();
+            if(num == destination) return true;
             
-            vis[node] = true;
-            for(auto &x: adj[node]) st.push(x);
-            
+            for(auto &x: adj[num]){
+                if(!vis[x]){
+                    q.push(x);
+                    vis[x] = true;
+                }
+            }
         }
         
         return false;
