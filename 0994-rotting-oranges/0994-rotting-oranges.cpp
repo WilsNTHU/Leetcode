@@ -6,7 +6,7 @@ public:
         
         queue<pair<int, int>> q;
         int count = -1;
-        bool no_fresh = true;
+        int count_fresh = 0;
         
         int dir_x[4] = {0, 1, 0, -1};
         int dir_y[4] = {1, 0, -1, 0};
@@ -16,10 +16,10 @@ public:
                 if(grid[i][j] == 2)
                     q.emplace(i, j);
                 if(grid[i][j] == 1)
-                    no_fresh = false;
+                    count_fresh++;
             }
         
-        if(no_fresh) return 0;
+        if(!count_fresh) return 0;
 
         
         while(!q.empty()){
@@ -36,16 +36,14 @@ public:
                       && grid[new_x][new_y]==1){
                         q.emplace(new_x, new_y);
                         grid[new_x][new_y] = 2;
+                        count_fresh--;
                     }
                 }
             }
         }
         
-        for(int i=0; i<m; i++)
-            for(int j=0; j<n; j++){
-                if(grid[i][j] == 1) return -1;
-            }
-        
+        if(count_fresh) return -1;
         return count;
+
     }
 };
