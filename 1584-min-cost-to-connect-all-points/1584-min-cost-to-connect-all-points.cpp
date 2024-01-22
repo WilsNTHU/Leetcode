@@ -1,3 +1,9 @@
+class Edge {
+    public:
+        int p1, p2, cost;
+        Edge(int _p1, int _p2, int _cost): p1(_p1), p2(_p2), cost(_cost){}
+};
+
 class Disjoint {
     public:
         Disjoint(int size): root(size), rank(size), count(size){
@@ -38,7 +44,7 @@ class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
         int n = points.size();
-        vector<tuple<int, int, int>> edges;
+        vector<Edge> edges;
         Disjoint ds(n);
         
         for(int i=0; i<n; i++)
@@ -49,24 +55,19 @@ public:
             }
         
         sort(edges.begin(), edges.end(), 
-             [](tuple<int, int, int> &t1, tuple<int, int, int> &t2){
-                 int p1, p2, p3, p4, dis1, dis2;
-                 tie(p1, p1, dis1) = t1;
-                 tie(p3, p4, dis2) = t2;
-                 return dis1 < dis2;
+             [](const Edge &e1, const Edge &e2){
+                 return e1.cost < e2.cost;
              });
         
         int ans = 0;
         int edge_count = 0;
         
-        for(auto &t: edges){
+        for(auto &e: edges){
             if(edge_count == n-1) return ans; 
             
-            int p1, p2, dis;
-            tie(p1, p2, dis) = t;
-            if(ds.find(p1) != ds.find(p2)){
-                ds.unionSet(p1,p2);
-                ans += dis;
+            if(ds.find(e.p1) != ds.find(e.p2)){
+                ds.unionSet(e.p1,e.p2);
+                ans += e.cost;
                 edge_count++;
             }
         }
