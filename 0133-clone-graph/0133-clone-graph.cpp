@@ -22,15 +22,13 @@ public:
 class Solution {
 public:
     unordered_map<Node*, Node*> mp;
-    
     Node* cloneGraph(Node* node) {
-        if(node == nullptr) return nullptr;
-        if(mp.find(node) == mp.end()){
-            Node *new_node = new Node(node->val, {});
-            mp[node] = new_node;
-            for(auto it: node->neighbors){
-                mp[node]->neighbors.push_back(cloneGraph(it));
-            }
+        if(!node) return NULL;
+        
+        if(!mp[node]){
+            mp[node] = new Node(node->val);
+            for(auto &x: node->neighbors)
+                mp[node]->neighbors.push_back(cloneGraph(x));
         }
         
         return mp[node];
