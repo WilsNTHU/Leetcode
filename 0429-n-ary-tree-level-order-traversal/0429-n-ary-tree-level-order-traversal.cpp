@@ -32,7 +32,7 @@ public:
             for(int i=q.size(); i>0; i--){
                 Node *node = q.front(); q.pop();
                 temp.push_back(node->val);
-                for(auto &x: node->children) q.emplace(x);
+                for(auto &x: node->children) q.push(x);
             }
             
             result.push_back(temp);
