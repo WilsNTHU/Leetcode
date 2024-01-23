@@ -16,9 +16,9 @@ public:
             if(edge_count >= k+1) continue;
         
             for(auto &p: graph[node]){
-                int adjNode = p.first, edW = p.second;
-                if(cost + edW < dist[adjNode] && edge_count<=k){
-                    dist[adjNode] = cost + edW;
+                int adjNode = p.first, weight = p.second;
+                if(cost + weight < dist[adjNode] && edge_count<=k){
+                    dist[adjNode] = cost + weight;
                     q.push({dist[adjNode], adjNode, edge_count+1});
                 }
             }
