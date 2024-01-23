@@ -7,8 +7,13 @@ public:
         for(auto &v: times)
             adj[v[0]-1].push_back({v[1]-1, v[2]});
         
+        
+        auto cmp = [](const pair<int, int> &p1, const pair<int, int> &p2){
+            return p1.first > p2.first;
+        };
+        
         // pair<int, int> -> (cost, node)
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)>               pq(cmp);
         pq.push({0, k-1});
         dis[k-1] = 0;
         
