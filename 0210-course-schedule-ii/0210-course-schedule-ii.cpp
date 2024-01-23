@@ -26,8 +26,8 @@ public:
             }
         }
         
-        vector<int> temp;
-        if(result.size() != numCourses) return temp;
+
+        if(result.size() != numCourses) return {};
         else return result;
     }
 };
