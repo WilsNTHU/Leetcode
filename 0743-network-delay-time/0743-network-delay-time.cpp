@@ -7,21 +7,21 @@ public:
         for(auto &v: times)
             adj[v[0]-1].push_back({v[1]-1, v[2]});
         
-        // pair<int, int> -> (node, cost)
+        // pair<int, int> -> (cost, node)
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
-        pq.push({k-1, 0});
+        pq.push({0, k-1});
         dis[k-1] = 0;
         
         while(!pq.empty()){
-            int node = pq.top().first;
-            int cost = pq.top().second;
+            int cost = pq.top().first;
+            int node = pq.top().second;
             pq.pop();
             for(auto &v: adj[node]){
                 int n2 = v.first;
                 int c2 = v.second;
                 if(cost + c2 < dis[n2]){
                     dis[n2] = cost + c2;
-                    pq.push({n2, dis[n2]});
+                    pq.push({dis[n2], n2});
                 }
             }
         }
