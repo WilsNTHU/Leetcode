@@ -3,7 +3,7 @@ public:
     int findKthLargest(vector<int>& nums, int k) {
         int left = 0, right = nums.size()-1;
         while(true){
-            int idx = rand()%(right-left+1) + left;
+            int idx = left + (right-left)/2;
             int new_idx = partition(nums, idx, left, right);
             if(new_idx == nums.size()-k) return nums[new_idx];
             else if(new_idx > nums.size()-k) right = new_idx - 1;
