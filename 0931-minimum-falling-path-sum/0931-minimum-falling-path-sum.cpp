@@ -36,21 +36,6 @@ using namespace std;
 
 class Solution {
 public:
-    int dfs(vector<vector<int>>& matrix, vector<vector<int>> &dp, 
-            int n, int i, int j){
-        if(j<0 || j>=n) return INT_MAX;
-        if(i == n-1) return matrix[i][j];
-        
-        if(dp[i][j] != -1) return dp[i][j];
-        
-        int down_sum = dfs(matrix, dp, n, i+1, j);
-        int down_left_sum = dfs(matrix, dp, n, i+1, j-1);
-        int down_right_sum = dfs(matrix, dp, n, i+1, j+1);
-        
-        return dp[i][j] = matrix[i][j] + min(down_sum, 
-                                             min(down_left_sum, down_right_sum));
-    }
-    
     int minFallingPathSum(vector<vector<int>>& matrix) {
         int n = matrix.size();
           
