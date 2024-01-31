@@ -28,6 +28,6 @@ public:
         H = houses, C = cost;
         dp.assign(m, vector<vector<int>>(n+1, vector<int>(target+1, -1)));
         int ans = helper(0, 0, 0);
-        return ans >= 1e9 ? -1 : ans;
+        return ans == 1e9 ? -1 : ans;
     }
 };
